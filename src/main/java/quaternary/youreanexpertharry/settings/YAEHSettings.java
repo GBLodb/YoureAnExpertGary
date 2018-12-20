@@ -3,21 +3,23 @@ package quaternary.youreanexpertharry.settings;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import quaternary.youreanexpertharry.heck.HeckMethods;
 import quaternary.youreanexpertharry.etc.HeckMethodProps;
 import quaternary.youreanexpertharry.heck.HeckTier;
-import quaternary.youreanexpertharry.modules.botania.ModuleBotania;
-import vazkii.botania.common.block.ModBlocks;
+import vazkii.botania.common.Botania;
+import vazkii.botania.common.core.BotaniaCreativeTab;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class YAEHSettings {
 	public List<HeckTier.TierItemStack> goalItems = new ArrayList<>();
-	public int topDifficulty = 5;
+	public int topDifficulty = 6;
 	
 	public List<HeckTier.TierItemStack> bannedItems = new ArrayList<>();
 	public List<HeckTier.TierItemStack> baseItems = new ArrayList<>();
@@ -89,21 +91,57 @@ public class YAEHSettings {
 		heckMethods.add(new HeckMethodProps(HeckMethods.SHAPELESS_TWO_BY_TWO, 1, 3));
 		heckMethods.add(new HeckMethodProps(HeckMethods.FOUR_WAY_SYMMETRICAL_THREE_BY_THREE, 2, 4));
 		heckMethods.add(new HeckMethodProps(HeckMethods.SYMMETRICAL_SHAPED_THREE_BY_THREE, 2, 4));
-		heckMethods.add(new HeckMethodProps(HeckMethods.SHAPED_THREE_BY_THREE, 5, 5));
+		heckMethods.add(new HeckMethodProps(HeckMethods.SHAPED_THREE_BY_THREE, 5, 6));
 		//Sanity check--one furnace recipe per tier!
 		heckMethods.add(new HeckMethodProps(HeckMethods.SMELTING, 1, 4));
 
 		//Botania stuff
 		if (Loader.isModLoaded("botania") && Loader.isModLoaded("modtweaker")) {
-			goalItems.add(new HeckTier.TierItemStack(new ItemStack(ModBlocks.pool), 1));
-			heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("mana_infusion"), 2, 4));
+			NonNullList<ItemStack> flowers = NonNullList.create();
+			vazkii.botania.common.block.ModBlocks.specialFlower.getSubBlocks(BotaniaCreativeTab.INSTANCE, flowers);
+			//Get ready for mana pool. A mana pool requires a mana spreader, a wand of the forest, and some sort of generating flower.
+			//I realise that all of those can be made without the petal apothecary. But, I'll use it, so that I can have petal apothecary recipes in tier 1.
+			baseItems.add(new HeckTier.TierItemStack(new ItemStack(Blocks.STONE_SLAB, 1, 3), 0));
+			baseItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.altar, 1, 0), 0));
+			baseItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.twigWand), 0));
+			addAllSubtypesTo(baseItems, vazkii.botania.common.item.ModItems.petal, 0);
 
+			//Tier 1
+			if (Loader.isModLoaded("botania_tweaks")) {
+				heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("petal_apothecary"), 1, 3));
+			}
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.blackLotus), 1));
+			//Can't add flowers. Add goalItems for the flower ingredients?
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.spreader, 1, 0), 0));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.pool), 1));
+
+			heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("mana_infusion"), 2, 4));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.alchemyCatalyst), 2));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.runeAltar), 2));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.fertilizer), 2));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.livingrock), 2));
+
+			heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("mana_alchemy"), 3,4));
+			heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("runic_altar"), 3, 6));
+
+			heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("elven_trade"), 4, 6));
+
+			if (Loader.isModLoaded("botania_tweaks")) {
+				//heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("basic_agglomeration"), 4, 5));
+				//heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("advanced_agglomeration"), 5, 6));
+			}
 		}
 	}
 	
 	private static void addAllSubtypesTo(List<HeckTier.TierItemStack> list, Block b, int tier) {
 		NonNullList<ItemStack> bepis = NonNullList.create();
 		b.getSubBlocks(b.getCreativeTab(), bepis);
+		bepis.forEach(is -> list.add(new HeckTier.TierItemStack(is, tier)));
+	}
+
+	private static void addAllSubtypesTo(List<HeckTier.TierItemStack> list, Item i, int tier) {
+		NonNullList<ItemStack> bepis = NonNullList.create();
+		i.getSubItems(i.getCreativeTab(), bepis);
 		bepis.forEach(is -> list.add(new HeckTier.TierItemStack(is, tier)));
 	}
 }

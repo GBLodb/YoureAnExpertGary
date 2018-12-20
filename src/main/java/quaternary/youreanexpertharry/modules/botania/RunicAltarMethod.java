@@ -11,16 +11,14 @@ import quaternary.youreanexpertharry.heck.Heck;
 import quaternary.youreanexpertharry.heck.HeckData;
 import quaternary.youreanexpertharry.heck.Heckception;
 import vazkii.botania.api.BotaniaAPI;
-import vazkii.botania.api.recipe.RecipePetals;
+import vazkii.botania.api.recipe.RecipeRuneAltar;
 import vazkii.botania.common.block.ModBlocks;
 
 import java.util.*;
 
-public class PetalApothecaryMethod extends AbstractHeckMethod {
+public class RunicAltarMethod extends AbstractHeckMethod {
 
-    public PetalApothecaryMethod() {
-        super(9);
-    }
+    public RunicAltarMethod() {super(9);}
 
     public static Set<HashSet<ShapelessStack>> sanitySet = new HashSet<>();
 
@@ -39,7 +37,7 @@ public class PetalApothecaryMethod extends AbstractHeckMethod {
             }
             recipeStacks.forEach(is -> ShapelessStack.shapelessAdd(shapelessSet, is));
 
-            YoureAnExpertHarry.LOGGER.info("Sanity-checking petal apothecary");
+            YoureAnExpertHarry.LOGGER.info("Sanity-checking runic altar");
             YoureAnExpertHarry.LOGGER.info(recipeStacks.toString());
             sanity = this.sanityCheck(shapelessSet);
         }
@@ -57,10 +55,10 @@ public class PetalApothecaryMethod extends AbstractHeckMethod {
 
     @Override
     public String removeExistingRecipe(ItemStack output) {
-        for (RecipePetals r : BotaniaAPI.petalRecipes) {
+        for (RecipeRuneAltar r : BotaniaAPI.runeAltarRecipes) {
             if (r.getOutput() != null && (new Heck.GoodItemStack(r.getOutput())).equals(new Heck.GoodItemStack(output))) {
                 return String.format(
-                        "Apothecary.removeRecipe(%s);\n",
+                        "RuneAltar.removeRecipe(%s);\n",
                         stackToBracket(output)
                 );
             }
@@ -69,21 +67,23 @@ public class PetalApothecaryMethod extends AbstractHeckMethod {
     }
 
     public String writeZenscript(String recipeName, ItemStack output, List<ItemStack> inputs) {
+        int manaCost = Heck.random.nextInt(8) * 1000 + 5000;
         return String.format(
-                "Apothecary.addRecipe(%s, %s);",
+                "RuneAltar.addRecipe(%s, %s, %s);",
                 stackToBracket(output),
-                stacksToBracketedList(inputs)
+                stacksToBracketedList(inputs),
+                manaCost
         );
     }
 
     @Override
-    public Optional<String> getRequiredImports() {
-        return Optional.of("import mods.botania.Apothecary;");
+    public List<ItemStack> getRequiredItems() {
+        return ImmutableList.of(new ItemStack(ModBlocks.runeAltar), new ItemStack(ModBlocks.livingrock));
     }
 
     @Override
-    public List<ItemStack> getRequiredItems() {
-        return ImmutableList.of(new ItemStack(ModBlocks.altar, 1, 0));
+    public Optional<String> getRequiredImports() {
+        return Optional.of("import mods.botania.RuneAltar;");
     }
 
 }
