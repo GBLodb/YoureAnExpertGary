@@ -107,8 +107,7 @@ public class YAEHSettings {
 
 			//Tier 1
 			if (Loader.isModLoaded("botania_tweaks")) {
-				//Petal apothecary isn't taking non-petal items right now.
-				//heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("petal_apothecary"), 1, 3));
+				heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("petal_apothecary"), 1, 3));
 			}
 			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.twigWand), 0));
 			//Can't add flowers. Add goalItems for the flower ingredients?

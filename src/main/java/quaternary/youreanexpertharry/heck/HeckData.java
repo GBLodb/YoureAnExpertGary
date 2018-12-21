@@ -1,5 +1,7 @@
 package quaternary.youreanexpertharry.heck;
 
+import quaternary.youreanexpertharry.heck.tasks.IHeckTask;
+import quaternary.youreanexpertharry.heck.tasks.RecipeTask;
 import quaternary.youreanexpertharry.settings.YAEHSettings;
 
 import java.util.ArrayList;
@@ -15,9 +17,12 @@ public class HeckData {
     public Set<Heck.GoodItemStack> allGoalItems = new HashSet<>();
     public Set<Heck.GoodItemStack> allBaseItems = new HashSet<>();
     public Set<AbstractHeckMethod> usedMethods = new HashSet<>();
+    public Set<IHeckTask> tasks = new HashSet<>();
+    public Set<IHeckTask> nextTasks = new HashSet<>();
 
     public List<HeckTier> tiers = new ArrayList<>();
     public int currentLevel;
+    public int recipeCount;
 
     public HeckData(YAEHSettings settings) {
         this.currentLevel = settings.topDifficulty;
@@ -43,7 +48,9 @@ public class HeckData {
             Heck.GoodItemStack gis = new Heck.GoodItemStack(tis);
             allGoalItems.add(gis);
             if (tis.tier == 0 || tis.tier == settings.topDifficulty) {
-                toAddRecipesFor.add(gis);
+                //toAddRecipesFor.add(gis);
+                bannedItems.add(gis);
+                tasks.add(new RecipeTask(this, Heck.settings, Heck.settings.topDifficulty, gis));
             }
             else {
                 tiers.get(tis.tier).goalItems.add(gis);
@@ -65,7 +72,7 @@ public class HeckData {
 
         //don't use a top tier item in another top tier item recipe
         //for that VARIED GAMEPLAY
-        bannedItems.addAll(toAddRecipesFor);
+        //bannedItems.addAll(toAddRecipesFor);
 
     }
 }
