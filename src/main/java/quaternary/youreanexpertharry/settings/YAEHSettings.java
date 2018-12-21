@@ -11,8 +11,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import quaternary.youreanexpertharry.heck.HeckMethods;
 import quaternary.youreanexpertharry.etc.HeckMethodProps;
 import quaternary.youreanexpertharry.heck.HeckTier;
-import vazkii.botania.common.Botania;
-import vazkii.botania.common.core.BotaniaCreativeTab;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +27,9 @@ public class YAEHSettings {
 	{
 		goalItems.add(new HeckTier.TierItemStack(Items.CLAY_BALL));
 		goalItems.add(new HeckTier.TierItemStack(Blocks.CLAY));
-		goalItems.add(new HeckTier.TierItemStack(Blocks.BEACON));
+		if (!(Loader.isModLoaded("botania"))) {
+			goalItems.add(new HeckTier.TierItemStack(Blocks.BEACON));
+		}
 		//You can't even use these in gamemode 0 but that won't stop me
 		goalItems.add(new HeckTier.TierItemStack(Blocks.COMMAND_BLOCK));
 		goalItems.add(new HeckTier.TierItemStack(new ItemStack(Blocks.OBSIDIAN), 2));
@@ -58,7 +58,8 @@ public class YAEHSettings {
 		baseItems.add(new HeckTier.TierItemStack(Items.GOLD_INGOT));
 		baseItems.add(new HeckTier.TierItemStack(Items.DIAMOND));
 		addAllSubtypesTo(baseItems, Blocks.LOG, 0);
-		addAllSubtypesTo(baseItems, Blocks.LOG2, 0);
+		//for exploration!
+		//addAllSubtypesTo(baseItems, Blocks.LOG2, 0);
 		baseItems.add(new HeckTier.TierItemStack(Blocks.COBBLESTONE));
 		baseItems.add(new HeckTier.TierItemStack(Blocks.DIRT));
 		addAllSubtypesTo(baseItems, Blocks.SAPLING, 0);
@@ -98,7 +99,7 @@ public class YAEHSettings {
 		//Botania stuff
 		if (Loader.isModLoaded("botania") && Loader.isModLoaded("modtweaker")) {
 			NonNullList<ItemStack> flowers = NonNullList.create();
-			vazkii.botania.common.block.ModBlocks.specialFlower.getSubBlocks(BotaniaCreativeTab.INSTANCE, flowers);
+			vazkii.botania.common.block.ModBlocks.specialFlower.getSubBlocks(vazkii.botania.common.core.BotaniaCreativeTab.INSTANCE, flowers);
 			//Get ready for mana pool. A mana pool requires a mana spreader, a wand of the forest, and some sort of generating flower.
 			//I realise that all of those can be made without the petal apothecary. But, I'll use it, so that I can have petal apothecary recipes in tier 1.
 			baseItems.add(new HeckTier.TierItemStack(new ItemStack(Blocks.STONE_SLAB, 1, 3), 0));
@@ -109,7 +110,8 @@ public class YAEHSettings {
 			if (Loader.isModLoaded("botania_tweaks")) {
 				heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("petal_apothecary"), 1, 3));
 			}
-			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.twigWand), 0));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.lexicon), 1));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.twigWand), 1));
 			//Can't add flowers. Add goalItems for the flower ingredients?
 			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.spreader, 1, 0), 1));
 			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.pool), 1));
