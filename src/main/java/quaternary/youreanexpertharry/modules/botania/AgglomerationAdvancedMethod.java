@@ -28,9 +28,10 @@ public class AgglomerationAdvancedMethod extends AbstractHeckMethod {
 
     public static Set<HashSet<ShapelessStack>> sanitySet = new HashSet<>();
 
-    public Pair<List<ItemStack>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
+    public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
         List<ItemStack> recipeStacks = new ArrayList<>(inputCount);
         HashSet<ShapelessStack> shapelessSet = new HashSet<>();
+        String s = null;
 
         boolean sanity = false;
         boolean success = true;
@@ -66,6 +67,8 @@ public class AgglomerationAdvancedMethod extends AbstractHeckMethod {
                     attemptCount++;
                     if (attemptCount > 250) {
                         success = false;
+                        recipeStacks.clear();
+                        shapelessSet.clear();
                         break OUTER;
                     }
                 }
@@ -77,9 +80,15 @@ public class AgglomerationAdvancedMethod extends AbstractHeckMethod {
             sanity = this.sanityCheck(shapelessSet);
         }
         YoureAnExpertHarry.LOGGER.info("Sanity succeeded");
-        sanitySet.add(shapelessSet);
 
-        return new MutablePair<>(recipeStacks, new Boolean(success));
+        if (success) {
+            sanitySet.add(shapelessSet);
+            s = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
+            if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
+        }
+
+
+        return new MutablePair<>(new MutablePair<>(recipeStacks, s), new Boolean(success));
 
     }
 

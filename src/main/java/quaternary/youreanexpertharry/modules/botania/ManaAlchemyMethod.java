@@ -21,9 +21,10 @@ public class ManaAlchemyMethod extends AbstractHeckMethod {
         super(1);
     }
 
-    public Pair<List<ItemStack>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
+    public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
         List<ItemStack> recipeStacks = new ArrayList<>(1);
         Heck.GoodItemStack sanityItem = null;
+        String b = null;
 
         boolean sanity = false;
         int attemptCount = 0;
@@ -46,9 +47,13 @@ public class ManaAlchemyMethod extends AbstractHeckMethod {
             sanity = this.sanityCheck(sanityItem);
         }
         YoureAnExpertHarry.LOGGER.info("Sanity succeeded");
-        ManaInfusionMethod.sanitySet.add(sanityItem);
+        if (success) {
+            ManaInfusionMethod.sanitySet.add(sanityItem);
+            if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
+            b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
+        }
 
-        return new MutablePair<>(recipeStacks, new Boolean(success));
+        return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(success));
 
     }
 
@@ -64,12 +69,14 @@ public class ManaAlchemyMethod extends AbstractHeckMethod {
 
     @Override
     public String removeExistingRecipe(ItemStack output) {
-        for (RecipeManaInfusion r : BotaniaAPI.manaInfusionRecipes) {
-            if (r.getOutput() != null && (new Heck.GoodItemStack(r.getOutput())).equals(new Heck.GoodItemStack(output))) {
-                return String.format(
-                        "ManaInfusion.removeRecipe(%s);",
-                        stackToBracket(output)
-                );
+        if (Heck.settings.heckMethods.stream().noneMatch(p -> p.method instanceof ManaInfusionMethod)) {
+            for (RecipeManaInfusion r : BotaniaAPI.manaInfusionRecipes) {
+                if (r.getOutput() != null && (new Heck.GoodItemStack(r.getOutput())).equals(new Heck.GoodItemStack(output))) {
+                    return String.format(
+                            "ManaInfusion.removeRecipe(%s);",
+                            stackToBracket(output)
+                    );
+                }
             }
         }
         return ("");

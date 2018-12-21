@@ -10,7 +10,6 @@ import java.util.List;
 
 public class ModuleBotaniaTweaks extends AbstractModule {
 
-    public static PetalApothecaryMethod PETAL_APOTHECARY;
     public static AgglomerationBasicMethod BASIC_AGGLOMERATION;
     public static AgglomerationAdvancedMethod ADVANCED_AGGLOMERATION;
 
@@ -19,7 +18,6 @@ public class ModuleBotaniaTweaks extends AbstractModule {
     public static List<String> methodIds = new ArrayList<>();
 
     public void init(BiMap<String, AbstractHeckMethod> heckMethods) {
-        PETAL_APOTHECARY = registerMethod("petal_apothecary", new PetalApothecaryMethod(), heckMethods);
         BASIC_AGGLOMERATION = registerMethod("basic_agglomeration", new AgglomerationBasicMethod(), heckMethods);
         ADVANCED_AGGLOMERATION = registerMethod("advanced_agglomeration", new AgglomerationAdvancedMethod(), heckMethods);
     }

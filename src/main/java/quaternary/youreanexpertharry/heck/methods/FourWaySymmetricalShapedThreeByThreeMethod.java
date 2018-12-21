@@ -36,7 +36,7 @@ public class FourWaySymmetricalShapedThreeByThreeMethod extends AbstractCrafting
 		);
 	}
 
-	public Pair<List<ItemStack>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
+	public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
 		List<ItemStack> recipeStacks = new ArrayList<>(this.inputCount);
 		List<Heck.GoodItemStack> sanityList = new ArrayList<>(this.inputCount);
 
@@ -49,21 +49,18 @@ public class FourWaySymmetricalShapedThreeByThreeMethod extends AbstractCrafting
 				recipeStacks.add(Heck.chooseItem(allHeck, outputGood, base));
 			}
 			recipeStacks.forEach(is -> sanityList.add(new Heck.GoodItemStack(is)));
-
-			//YoureAnExpertHarry.LOGGER.info("Sanity-checking 4s3b3");
-			//YoureAnExpertHarry.LOGGER.info(recipeStacks.toString());
 			sanity = this.sanityCheck(sanityList);
 		}
-		//YoureAnExpertHarry.LOGGER.info("Sanity succeeded");
 		sanitySet.add(sanityList);
+		if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
+		String b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
 
-		return new MutablePair<>(recipeStacks, new Boolean(true));
+		return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(true));
 
 	}
 
 	private boolean sanityCheck(List<Heck.GoodItemStack> stackList) {
 		if (sanitySet.contains(stackList)) {
-			//YoureAnExpertHarry.LOGGER.info("check failed");
 			return false;
 		}
 		return true;

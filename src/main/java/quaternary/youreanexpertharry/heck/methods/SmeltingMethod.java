@@ -19,9 +19,10 @@ public class SmeltingMethod extends AbstractHeckMethod {
 
 	public static Set<Heck.GoodItemStack> sanitySet = new HashSet<>();
 
-	public Pair<List<ItemStack>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
+	public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
 		List<ItemStack> recipeStacks = new ArrayList<>(1);
 		Heck.GoodItemStack sanityItem = null;
+		String b = null;
 
 		boolean sanity = false;
 		int attemptCount = 0;
@@ -29,6 +30,7 @@ public class SmeltingMethod extends AbstractHeckMethod {
 
 		while (!(sanity)) {
 			recipeStacks.clear();
+			sanityItem = null;
 			attemptCount++;
 			if (attemptCount > 250) {
 				success = false;
@@ -44,9 +46,13 @@ public class SmeltingMethod extends AbstractHeckMethod {
 			sanity = this.sanityCheck(sanityItem);
 		}
 		//YoureAnExpertHarry.LOGGER.info("Sanity succeeded");
-		sanitySet.add(sanityItem);
+		if (success) {
+			sanitySet.add(sanityItem);
+			if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
+			b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
+		}
 
-		return new MutablePair<>(recipeStacks, new Boolean(success));
+		return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(success));
 
 	}
 

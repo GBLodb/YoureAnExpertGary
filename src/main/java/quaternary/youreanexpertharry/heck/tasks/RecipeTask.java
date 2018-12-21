@@ -28,11 +28,14 @@ public class RecipeTask implements IHeckTask {
     public String execute() throws Heckception {
         method = Heck.chooseMethod(settings, tier, null);
         List<ItemStack> recipeStacks = new ArrayList<>();
+        String zs = "";
         for (int i = 0; i < 6; i++) {
-            Pair<List<ItemStack>, Boolean> attempt;
+            Pair<Pair<List<ItemStack>, String>, Boolean> attempt;
+            Pair<List<ItemStack>, Boolean> attemptOld;
             attempt = method.chooseInputs(allHeck, outputGood, tier == 0);
-            if (attempt.getRight() == true) {
-                recipeStacks = attempt.getLeft();
+            if (attempt.getRight()) {
+                recipeStacks = attempt.getLeft().getLeft();
+                zs = attempt.getLeft().getRight();
                 allHeck.usedMethods.add(method);
                 break;
             }
@@ -52,17 +55,10 @@ public class RecipeTask implements IHeckTask {
         b.append(method.removeRecipe(outputGood.actualStack));
         b.append('\n');
 
-        b.append(method.writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks));
+        b.append(zs);
         b.append('\n');
 
         allHeck.recipeCount++;
-
-        if (tier != 0) for (ItemStack is : recipeStacks) {
-            Heck.GoodItemStack gis = new Heck.GoodItemStack(is);
-            if (!(allHeck.allGoalItems.contains(gis)) && !(allHeck.allBaseItems.contains(gis))) {
-                allHeck.nextTasks.add(new RecipeTask(allHeck, settings, tier - 1, gis));
-            }
-        }
 
         return b.toString();
     }
