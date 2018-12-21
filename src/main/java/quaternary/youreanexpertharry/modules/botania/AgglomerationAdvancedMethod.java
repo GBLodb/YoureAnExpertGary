@@ -40,7 +40,13 @@ public class AgglomerationAdvancedMethod extends AbstractHeckMethod {
             recipeStacks.clear();
             shapelessSet.clear();
             for(int a = 0; a < 3; a++) {
-                recipeStacks.add(Heck.chooseItem(allHeck, outputGood, base));
+                while (true) {
+                    ItemStack is = Heck.chooseItem(allHeck, outputGood, base);
+                    if (!(recipeStacks.contains(is))) {
+                        recipeStacks.add(is);
+                        break;
+                    }
+                }
             }
             int attemptCount = 0;
             for(int a = 0; a < 2; a++) {

@@ -50,9 +50,18 @@ These are the recipe types. Why I called them "Heck Methods", well, the main fun
 * `square_shaped_3x3`: Rotationally symmetric 3x3 with 3 random items
 * `furnace`: Smelting recipe
 
-Botania:
+Botania (requires ModTweaker):
 
-* `mana_infusion`: One item -> one item with a random mana cost between that of manasteel and mana diamonds. No alchemy yet.
+* `mana_infusion`: One item -> one item with a random mana cost between that of manasteel and mana diamonds.
+* `mana_alchemy`: Same as mana infusion but requires the alchemy catalyst.
+* `runic_altar`: 1-9 inputs, 1 output with a random mana cost between that of elemental and sin runes.
+* `elven_trade`: 1-2 inputs, 1 output.
+
+With Botania Tweaks:
+
+* `petal_apothecary`: This one doesn't work right now quat pls
+* `basic_agglomeration`: 3 items -> 1 item with a random mana cost from 1/5 of terrasteel to the cost of terrasteel.
+* `advanced_agglomeration`: Basic agglomeration but it also creates a custom multiblock for the agglomeration plate that resets to the traditional agglomeration plate every time you craft.
 
 More to come iff you're interested.
 
