@@ -31,7 +31,6 @@ public abstract class AbstractHeckMethod {
 		for (AbstractModule mod : YoureAnExpertHarry.modules) {
 			for (String id : mod.getMethodIds()) {
 				b.append(mod.getMethods().get(id).removeExistingRecipe(output));
-				b.append("\n");
 			}
 		}
 		return b.toString();

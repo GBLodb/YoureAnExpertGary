@@ -103,16 +103,16 @@ public class YAEHSettings {
 			//I realise that all of those can be made without the petal apothecary. But, I'll use it, so that I can have petal apothecary recipes in tier 1.
 			baseItems.add(new HeckTier.TierItemStack(new ItemStack(Blocks.STONE_SLAB, 1, 3), 0));
 			baseItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.altar, 1, 0), 0));
-			baseItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.twigWand), 0));
 			addAllSubtypesTo(baseItems, vazkii.botania.common.item.ModItems.petal, 0);
 
 			//Tier 1
 			if (Loader.isModLoaded("botania_tweaks")) {
-				heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("petal_apothecary"), 1, 3));
+				//Petal apothecary isn't taking non-petal items right now.
+				//heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("petal_apothecary"), 1, 3));
 			}
-			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.blackLotus), 1));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.twigWand), 0));
 			//Can't add flowers. Add goalItems for the flower ingredients?
-			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.spreader, 1, 0), 0));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.spreader, 1, 0), 1));
 			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.pool), 1));
 
 			heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("mana_infusion"), 2, 4));
@@ -123,12 +123,27 @@ public class YAEHSettings {
 
 			heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("mana_alchemy"), 3,4));
 			heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("runic_altar"), 3, 6));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.livingwood, 1, 0), 3));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.livingwood, 1, 5), 3));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.alfPortal), 3));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.pylon, 1, 1), 3));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.pylon, 1, 2), 3));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.block.ModBlocks.terraPlate), 3));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.spark), 3));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(Blocks.LAPIS_BLOCK), 3));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(Blocks.BEACON), 3));
+			goalItems.add(new HeckTier.TierItemStack(new ItemStack(Blocks.IRON_BLOCK), 3));
 
 			heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("elven_trade"), 4, 6));
+			baseItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.manaResource, 1, 4), 4));
+
+			baseItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.manaResource, 1, 5), 5));
+			baseItems.add(new HeckTier.TierItemStack(new ItemStack(vazkii.botania.common.item.ModItems.manaResource, 1, 14), 5));
+
 
 			if (Loader.isModLoaded("botania_tweaks")) {
-				//heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("basic_agglomeration"), 4, 5));
-				//heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("advanced_agglomeration"), 5, 6));
+				heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("basic_agglomeration"), 4, 5));
+				heckMethods.add(new HeckMethodProps(HeckMethods.methods.get("advanced_agglomeration"), 5, 6));
 			}
 		}
 	}

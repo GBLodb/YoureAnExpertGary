@@ -68,7 +68,7 @@ public class ManaInfusionMethod extends AbstractHeckMethod {
         for (RecipeManaInfusion r : BotaniaAPI.manaInfusionRecipes) {
             if (r.getOutput() != null && (new Heck.GoodItemStack(r.getOutput())).equals(new Heck.GoodItemStack(output))) {
                 return String.format(
-                        "ManaInfusion.removeRecipe(%s);",
+                        "ManaInfusion.removeRecipe(%s);\n",
                         stackToBracket(output)
                 );
             }
