@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import quaternary.youreanexpertharry.heck.HeckMethods;
 import quaternary.youreanexpertharry.etc.HeckMethodProps;
 import quaternary.youreanexpertharry.heck.HeckTier;

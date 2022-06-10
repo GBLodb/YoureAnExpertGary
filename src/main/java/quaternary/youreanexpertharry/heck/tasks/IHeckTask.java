@@ -1,6 +1,5 @@
 package quaternary.youreanexpertharry.heck.tasks;
 
-import quaternary.youreanexpertharry.heck.HeckData;
 import quaternary.youreanexpertharry.heck.Heckception;
 
 public interface IHeckTask {
