@@ -1,7 +1,10 @@
 buildscript {
     repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        mavenCentral()
+        maven {
+            name = 'forge'
+            url = 'https://maven.minecraftforge.net/'
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -9,57 +12,61 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-
-repositories {
-    maven {
-        url = "http://maven.blamejared.com/"
-    }
-    
-    maven {
-        url = "http://dvs1.progwml6.com/files/maven/"
+// change FG2's default maven url to the new one.
+repositories.each {
+    if (it instanceof MavenArtifactRepository && it.url.toString() == 'https://files.minecraftforge.net/maven') {
+        it.url = 'https://maven.minecraftforge.net/'
     }
 }
 
-version = "1.1.2"
-group = "quaternary.youreanexpertharry"
-archivesBaseName = "youre_an_expert_harry"
+repositories {
+    maven {
+        name = 'blamejared'
+        url = 'https://maven.blamejared.com/'
+    }
+    
+    maven {
+        name = 'jei'
+        url = 'https://dvs1.progwml6.com/files/maven/'
+    }
 
-sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+    maven {
+        name = 'cursemaven'
+        url = 'https://cfa2.cursemaven.com/'
+    }
+}
+
+version = '1.1.2'
+group = 'quaternary.youreanexpertharry'
+archivesBaseName = 'youre_an_expert_harry'
+
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2768"
-    runDir = "run"
-    mappings = "stable_39"
-    makeObfSourceJar = false
-    
-    replace "GRADLE:VERSION", project.version
+    version = '1.12.2-14.23.5.2847'
+    runDir = 'run'
+    mappings = 'snapshot_20171003'
 }
 
 dependencies {
-    runtime "com.blamejared:MTLib:3.0.4.8"
-    runtime "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.12.507"
-    deobfCompile "vazkii.botania:Botania:r1.10-357.7"
-    
-    runtime "mezz.jei:jei_1.12.2:4.13.1.225"
+    runtime 'com.blamejared:MTLib:3.0.5.15'
+    runtime 'CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.674'
+    deobfCompile 'vazkii.botania:Botania:r1.10-363.148'
+
+    runtime 'mezz.jei:jei_1.12.2:4.16.1.302'
 }
 
 processResources {
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
-        // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
         
-    // copy everything else except the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
