@@ -21,7 +21,7 @@ public class ElvenTradeMethod extends AbstractHeckMethod {
 
     public ElvenTradeMethod() {super(2);}
 
-    public static Set<HashSet<ShapelessStack>> sanitySet = new HashSet<>();
+    public static final Set<HashSet<ShapelessStack>> sanitySet = new HashSet<>();
 
     public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
 
@@ -57,13 +57,12 @@ public class ElvenTradeMethod extends AbstractHeckMethod {
             b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
         }
 
-        return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(success));
+        return new MutablePair<>(new MutablePair<>(recipeStacks, b), success);
 
     }
 
     private boolean sanityCheck(HashSet<ShapelessStack> shapelessSet) {
-        if (sanitySet.contains(shapelessSet)) return false;
-        return true;
+        return !sanitySet.contains(shapelessSet);
     }
 
     @Override

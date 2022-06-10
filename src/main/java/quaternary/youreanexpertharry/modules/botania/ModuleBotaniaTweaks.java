@@ -13,9 +13,9 @@ public class ModuleBotaniaTweaks extends AbstractModule {
     public static AgglomerationBasicMethod BASIC_AGGLOMERATION;
     public static AgglomerationAdvancedMethod ADVANCED_AGGLOMERATION;
 
-    public static BiMap<String, AbstractHeckMethod> methods = HashBiMap.create();
+    public static final BiMap<String, AbstractHeckMethod> methods = HashBiMap.create();
 
-    public static List<String> methodIds = new ArrayList<>();
+    public static final List<String> methodIds = new ArrayList<>();
 
     public void init(BiMap<String, AbstractHeckMethod> heckMethods) {
         BASIC_AGGLOMERATION = registerMethod("basic_agglomeration", new AgglomerationBasicMethod(), heckMethods);

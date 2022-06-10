@@ -53,13 +53,12 @@ public class ManaAlchemyMethod extends AbstractHeckMethod {
             b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
         }
 
-        return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(success));
+        return new MutablePair<>(new MutablePair<>(recipeStacks, b), success);
 
     }
 
     private boolean sanityCheck(Heck.GoodItemStack sanityItem) {
-        if (ManaInfusionMethod.sanitySet.contains(sanityItem)) return false;
-        return true;
+        return !ManaInfusionMethod.sanitySet.contains(sanityItem);
     }
 
     @Override

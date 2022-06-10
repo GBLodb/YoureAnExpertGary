@@ -22,7 +22,7 @@ public class PetalApothecaryMethod extends AbstractHeckMethod {
         super(9);
     }
 
-    public static Set<HashSet<ShapelessStack>> sanitySet = new HashSet<>();
+    public static final Set<HashSet<ShapelessStack>> sanitySet = new HashSet<>();
 
     public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
         int inputSize = Heck.random.nextInt(9) + 1;
@@ -48,13 +48,12 @@ public class PetalApothecaryMethod extends AbstractHeckMethod {
         if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
         String b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
 
-        return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(true));
+        return new MutablePair<>(new MutablePair<>(recipeStacks, b), Boolean.TRUE);
 
     }
 
     private boolean sanityCheck(HashSet<ShapelessStack> shapelessSet) {
-        if (sanitySet.contains(shapelessSet)) return false;
-        return true;
+        return !sanitySet.contains(shapelessSet);
     }
 
     @Override

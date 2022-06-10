@@ -17,7 +17,7 @@ public class ShapedThreeByThreeMethod extends AbstractCraftingMethod {
 		super(9);
 	}
 
-	public static Set<List<Heck.GoodItemStack>> sanitySet = new HashSet<>();
+	public static final Set<List<Heck.GoodItemStack>> sanitySet = new HashSet<>();
 	
 	@Override
 	public String writeZenscript(String recipeName, ItemStack output, List<ItemStack> inputs) {
@@ -54,15 +54,12 @@ public class ShapedThreeByThreeMethod extends AbstractCraftingMethod {
 		if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
 		String b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
 
-		return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(true));
+		return new MutablePair<>(new MutablePair<>(recipeStacks, b), Boolean.TRUE);
 
 	}
 
 	private boolean sanityCheck(List<Heck.GoodItemStack> stackList) {
-		if (sanitySet.contains(stackList)) {
-			//YoureAnExpertHarry.LOGGER.info("check failed");
-			return false;
-		}
-		return true;
+		//YoureAnExpertHarry.LOGGER.info("check failed");
+		return !sanitySet.contains(stackList);
 	}
 }

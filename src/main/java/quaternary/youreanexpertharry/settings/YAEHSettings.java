@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class YAEHSettings {
-	public List<HeckTier.TierItemStack> goalItems = new ArrayList<>();
-	public int topDifficulty = 6;
+	public final List<HeckTier.TierItemStack> goalItems = new ArrayList<>();
+	public final int topDifficulty = 6;
 	
-	public List<HeckTier.TierItemStack> bannedItems = new ArrayList<>();
-	public List<HeckTier.TierItemStack> baseItems = new ArrayList<>();
+	public final List<HeckTier.TierItemStack> bannedItems = new ArrayList<>();
+	public final List<HeckTier.TierItemStack> baseItems = new ArrayList<>();
 
-	public List<HeckMethodProps> heckMethods = new ArrayList<>();
+	public final List<HeckMethodProps> heckMethods = new ArrayList<>();
 	
 	{
 		goalItems.add(new HeckTier.TierItemStack(Items.CLAY_BALL));
@@ -103,13 +103,15 @@ public class YAEHSettings {
 	
 	public static void addAllSubtypesTo(List<HeckTier.TierItemStack> list, Block b, int tier) {
 		NonNullList<ItemStack> bepis = NonNullList.create();
-		b.getSubBlocks(b.getCreativeTab(), bepis);
+		b.getSubBlocks(b.getCreativeTabToDisplayOn(), bepis);
 		bepis.forEach(is -> list.add(new HeckTier.TierItemStack(is, tier)));
 	}
 
 	public static void addAllSubtypesTo(List<HeckTier.TierItemStack> list, Item i, int tier) {
 		NonNullList<ItemStack> bepis = NonNullList.create();
-		i.getSubItems(i.getCreativeTab(), bepis);
-		bepis.forEach(is -> list.add(new HeckTier.TierItemStack(is, tier)));
+		if (i.getCreativeTab() != null) {
+			i.getSubItems(i.getCreativeTab(), bepis);
+			bepis.forEach(is -> list.add(new HeckTier.TierItemStack(is, tier)));
+		}
 	}
 }

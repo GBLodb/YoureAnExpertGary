@@ -18,7 +18,7 @@ public class FourWaySymmetricalShapedThreeByThreeMethod extends AbstractCrafting
 		super(3);
 	}
 
-	public static Set<List<Heck.GoodItemStack>> sanitySet = new HashSet<>();
+	public static final Set<List<Heck.GoodItemStack>> sanitySet = new HashSet<>();
 	
 	@Override
 	public String writeZenscript(String recipeName, ItemStack output, List<ItemStack> inputs) {
@@ -55,14 +55,11 @@ public class FourWaySymmetricalShapedThreeByThreeMethod extends AbstractCrafting
 		if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
 		String b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
 
-		return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(true));
+		return new MutablePair<>(new MutablePair<>(recipeStacks, b), Boolean.TRUE);
 
 	}
 
 	private boolean sanityCheck(List<Heck.GoodItemStack> stackList) {
-		if (sanitySet.contains(stackList)) {
-			return false;
-		}
-		return true;
+		return !sanitySet.contains(stackList);
 	}
 }

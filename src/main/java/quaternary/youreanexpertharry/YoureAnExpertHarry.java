@@ -37,12 +37,12 @@ import java.util.List;
 )
 public class YoureAnExpertHarry {
 	public static final String MODID = "youre_an_expert_harry";
-	public static final String NAME = "You're an Expert, Harry!";
+	public static final String NAME = "You're an Expert, Gary!";
 	public static final String VERSION = "GRADLE:VERSION";
 	public static final Logger LOGGER = LogManager.getLogger(NAME);
 	
 	public static YAEHSettings settings = null;
-	public static Gson gson = new GsonBuilder()
+	public static final Gson gson = new GsonBuilder()
 					.setPrettyPrinting()
 					.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 					.registerTypeHierarchyAdapter(HeckTier.TierItemStack.class, new ItemStackReaderWriter())
@@ -51,7 +51,7 @@ public class YoureAnExpertHarry {
 	
 	public static File settingsFile;
 
-	public static List<AbstractModule> modules = new ArrayList<>();
+	public static final List<AbstractModule> modules = new ArrayList<>();
 	
 	@Mod.EventHandler
 	public static void preinit(FMLPreInitializationEvent e) {

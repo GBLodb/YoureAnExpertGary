@@ -16,9 +16,9 @@ public class ModuleBotania extends AbstractModule {
     public static RunicAltarMethod RUNIC_ALTAR;
     public static PetalApothecaryMethod PETAL_APOTHECARY;
 
-    public static BiMap<String, AbstractHeckMethod> methods = HashBiMap.create();
+    public static final BiMap<String, AbstractHeckMethod> methods = HashBiMap.create();
 
-    public static List<String> methodIds = new ArrayList<>();
+    public static final List<String> methodIds = new ArrayList<>();
 
     public ModuleBotania() {
 

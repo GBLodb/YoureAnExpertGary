@@ -20,7 +20,7 @@ public class ManaInfusionMethod extends AbstractHeckMethod {
         super(1);
     }
 
-    public static Set<Heck.GoodItemStack> sanitySet = new HashSet<>();
+    public static final Set<Heck.GoodItemStack> sanitySet = new HashSet<>();
 
     public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
         List<ItemStack> recipeStacks = new ArrayList<>(1);
@@ -54,13 +54,12 @@ public class ManaInfusionMethod extends AbstractHeckMethod {
             b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
         }
 
-        return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(success));
+        return new MutablePair<>(new MutablePair<>(recipeStacks, b), success);
 
     }
 
     private boolean sanityCheck(Heck.GoodItemStack sanityItem) {
-        if (sanitySet.contains(sanityItem)) return false;
-        return true;
+        return !sanitySet.contains(sanityItem);
     }
 
     @Override

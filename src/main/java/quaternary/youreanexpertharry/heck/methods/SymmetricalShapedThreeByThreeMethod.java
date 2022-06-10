@@ -18,7 +18,7 @@ public class SymmetricalShapedThreeByThreeMethod extends AbstractCraftingMethod 
 		super(6);
 	}
 
-	public static Set<List<Heck.GoodItemStack>> sanitySet = new HashSet<>();
+	public static final Set<List<Heck.GoodItemStack>> sanitySet = new HashSet<>();
 
 	public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
 		List<ItemStack> recipeStacks = new ArrayList<>(this.inputCount);
@@ -46,13 +46,12 @@ public class SymmetricalShapedThreeByThreeMethod extends AbstractCraftingMethod 
 		if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
 		String b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
 
-		return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(true));
+		return new MutablePair<>(new MutablePair<>(recipeStacks, b), Boolean.TRUE);
 
 	}
 
 	private boolean sanityCheck(List<Heck.GoodItemStack> stackList) {
-		if (sanitySet.contains(stackList)) return false;
-		return true;
+		return !sanitySet.contains(stackList);
 	}
 	
 	@Override

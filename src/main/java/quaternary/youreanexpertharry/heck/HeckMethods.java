@@ -61,7 +61,7 @@ public class HeckMethods {
 				AbstractHeckMethod hecc = byKey(s);
 				if(hecc == null) throw new JsonParseException("No such heck method '" + s + "'");
 				return hecc;
-			} else throw new JsonParseException("Problem parsing heck method, what is this thing: " + json.toString());
+			} else throw new JsonParseException("Problem parsing heck method, what is this thing: " + json);
 		}
 		
 		@Override

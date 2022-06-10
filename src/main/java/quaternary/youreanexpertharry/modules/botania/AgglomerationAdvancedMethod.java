@@ -24,7 +24,7 @@ public class AgglomerationAdvancedMethod extends AbstractHeckMethod {
 
     public AgglomerationAdvancedMethod() {super(5);}
 
-    public static Set<HashSet<ShapelessStack>> sanitySet = new HashSet<>();
+    public static final Set<HashSet<ShapelessStack>> sanitySet = new HashSet<>();
 
     public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
         List<ItemStack> recipeStacks = new ArrayList<>(inputCount);
@@ -58,7 +58,7 @@ public class AgglomerationAdvancedMethod extends AbstractHeckMethod {
                         if (b != null) {
                             if (b.getStateFromMeta(is.getMetadata()).getPropertyKeys().stream().noneMatch(p -> p instanceof PropertyDirection)) {
                                 recipeStacks.add(is);
-                                break INNER;
+                                break;
                             }
                         }
                     }
@@ -86,13 +86,12 @@ public class AgglomerationAdvancedMethod extends AbstractHeckMethod {
         }
 
 
-        return new MutablePair<>(new MutablePair<>(recipeStacks, s), new Boolean(success));
+        return new MutablePair<>(new MutablePair<>(recipeStacks, s), success);
 
     }
 
     private boolean sanityCheck(HashSet<ShapelessStack> shapelessSet) {
-        if (sanitySet.contains(shapelessSet)) return false;
-        return true;
+        return !sanitySet.contains(shapelessSet);
     }
 
     @Override
