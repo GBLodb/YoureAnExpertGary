@@ -18,8 +18,8 @@ public class ModuleBotaniaTweaks extends AbstractModule {
     public static final List<String> methodIds = new ArrayList<>();
 
     public void init(BiMap<String, AbstractHeckMethod> heckMethods) {
-        BASIC_AGGLOMERATION = registerMethod("basic_agglomeration", new AgglomerationBasicMethod(), heckMethods);
-        ADVANCED_AGGLOMERATION = registerMethod("advanced_agglomeration", new AgglomerationAdvancedMethod(), heckMethods);
+        BASIC_AGGLOMERATION = registerMethod("youre_an_expert_gary_basic_agglomeration", new AgglomerationBasicMethod(), heckMethods);
+        ADVANCED_AGGLOMERATION = registerMethod("youre_an_expert_gary_advanced_agglomeration", new AgglomerationAdvancedMethod(), heckMethods);
     }
 
     public static <T extends AbstractHeckMethod> T registerMethod(String id, T method, BiMap<String, AbstractHeckMethod> heckMethods) {

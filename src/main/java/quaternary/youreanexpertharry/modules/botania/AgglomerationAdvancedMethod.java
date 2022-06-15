@@ -81,7 +81,7 @@ public class AgglomerationAdvancedMethod extends AbstractHeckMethod {
 
         if (success) {
             sanitySet.add(shapelessSet);
-            s = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
+            s = writeZenscript("youre_an_expert_gary_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
             if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
         }
 

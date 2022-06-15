@@ -20,9 +20,7 @@ public class ModuleBotania extends AbstractModule {
 
     public static final List<String> methodIds = new ArrayList<>();
 
-    public ModuleBotania() {
-
-    }
+    public ModuleBotania() {}
 
     public void init(BiMap<String, AbstractHeckMethod> heckMethods) {
         MANA_INFUSION = registerMethod("mana_infusion", new ManaInfusionMethod(), heckMethods);

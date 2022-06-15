@@ -10,7 +10,7 @@ import quaternary.youreanexpertharry.heck.HeckTier;
 
 import java.util.List;
 
-public class BotaniaSettings {
+public class BotaniaSettings implements IModSettings {
 
     public static void init(List<HeckTier.TierItemStack> goalItems, List<HeckTier.TierItemStack> bannedItems, List<HeckTier.TierItemStack> baseItems, List<HeckMethodProps> heckMethods) {
         NonNullList<ItemStack> flowers = NonNullList.create();
