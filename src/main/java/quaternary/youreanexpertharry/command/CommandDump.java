@@ -11,12 +11,12 @@ import quaternary.youreanexpertharry.heck.Heckception;
 public class CommandDump extends CommandBase {
 	@Override
 	public String getName() {
-		return "youreanexpertharry";
+		return "youreanexpertgary";
 	}
 	
 	@Override
 	public String getUsage(ICommandSender sender) {
-		return "youreanexpertharry.usage";
+		return "youreanexpertgary.usage";
 	}
 	
 	@Override

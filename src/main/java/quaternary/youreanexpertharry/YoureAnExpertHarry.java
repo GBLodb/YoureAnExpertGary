@@ -17,6 +17,7 @@ import quaternary.youreanexpertharry.heck.HeckMethods;
 import quaternary.youreanexpertharry.etc.ItemStackReaderWriter;
 import quaternary.youreanexpertharry.heck.HeckTier;
 import quaternary.youreanexpertharry.modules.AbstractModule;
+import quaternary.youreanexpertharry.modules.actuallyAdditions.ModuleActuallyAddiditons;
 import quaternary.youreanexpertharry.modules.botania.ModuleBotania;
 import quaternary.youreanexpertharry.modules.botania.ModuleBotaniaTweaks;
 import quaternary.youreanexpertharry.settings.YAEHSettings;
@@ -36,7 +37,7 @@ import java.util.List;
 				clientSideOnly = true
 )
 public class YoureAnExpertHarry {
-	public static final String MODID = "youre_an_expert_harry";
+	public static final String MODID = "youre_an_expert_gary";
 	public static final String NAME = "You're an Expert, Gary!";
 	public static final String VERSION = "GRADLE:VERSION";
 	public static final Logger LOGGER = LogManager.getLogger(NAME);
@@ -62,10 +63,14 @@ public class YoureAnExpertHarry {
 			modules.add(new ModuleBotaniaTweaks());
 		}
 
+		if (Loader.isModLoaded("actuallyadditions") && Loader.isModLoaded("modtweaker")) {
+			modules.add(new ModuleActuallyAddiditons());
+		}
+
+
 		HeckMethods.init();
 		
 		settingsFile = new File(e.getSuggestedConfigurationFile().getParent() + File.separator + MODID + ".json");
-
 
 	}
 	

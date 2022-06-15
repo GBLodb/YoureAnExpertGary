@@ -95,9 +95,13 @@ public class YAEHSettings {
 		//Sanity check--one furnace recipe per tier!
 		heckMethods.add(new HeckMethodProps(HeckMethods.SMELTING, 1, 4));
 
-		//Botania stuff
-		if (Loader.isModLoaded("botania") && Loader.isModLoaded("modtweaker")) {
-            BotaniaSettings.init(goalItems, bannedItems, baseItems, heckMethods);
+		if (Loader.isModLoaded("modtweaker")) {
+			if (Loader.isModLoaded("botania")) {
+				BotaniaSettings.init(goalItems, bannedItems, baseItems, heckMethods);
+			}
+			if (Loader.isModLoaded("actuallyadditions")) {
+				ActuallyAdditionsSettings.init(goalItems, bannedItems, baseItems, heckMethods);
+			}
 		}
 	}
 	

@@ -51,17 +51,19 @@ public class Heck {
 		
 		StringBuilder header = new StringBuilder();
 		allHeck.usedMethods.forEach(a -> a.getRequiredImports().ifPresent(i -> {
-			header.append(i);
-			header.append('\n');
+			header.append(i).append("\n");
 		}));
 
 		File mainFolder = YoureAnExpertHarry.settingsFile.getParentFile().getParentFile();
 		File scriptsFolder = new File(mainFolder.getAbsolutePath() + File.separator + "scripts");
-		if (scriptsFolder.mkdirs()) {
-			splitAndWriteZenScript(header.toString(), zenBody, scriptsFolder);
+		try {
+			scriptsFolder.mkdirs();
+			splitAndWriteZenScript(header, zenBody, scriptsFolder);
 			YoureAnExpertHarry.LOGGER.info("Done");
+		} catch (Exception e) {
+			YoureAnExpertHarry.LOGGER.warn("Something went wrong while creating the scripts folder.");
+			e.printStackTrace();
 		}
-		YoureAnExpertHarry.LOGGER.warn("Something went wrong while creating the scripts folder.");
 	}
 
 	//Add disallowed recipes
@@ -106,7 +108,7 @@ public class Heck {
 				int data;
 				if(i.getHasSubtypes()) {
 					NonNullList<ItemStack> choices = NonNullList.create();
-					i.getSubItems(Objects.requireNonNull(i.getCreativeTab()), choices);
+					i.getSubItems(i.getCreativeTab(), choices);
 					if(choices.isEmpty()) data = 0;
 					else data = choices.get(random.nextInt(choices.size())).getMetadata();
 				} else {
@@ -137,7 +139,7 @@ public class Heck {
 		int data;
 		if (i.getHasSubtypes()) {
 			NonNullList<ItemStack> choices = NonNullList.create();
-			i.getSubItems(Objects.requireNonNull(i.getCreativeTab()), choices);
+			i.getSubItems(i.getCreativeTab(), choices);
 			if(choices.isEmpty()) data = 0;
 			else data = choices.get(random.nextInt(choices.size())).getMetadata();
 		} else {
@@ -165,22 +167,26 @@ public class Heck {
 		
 		@Override
 		public int hashCode() {
-			return Objects.requireNonNull(actualStack.getItem().getRegistryName()).hashCode() + actualStack.getMetadata() * 1232323;
+			return actualStack.getItem().getRegistryName().hashCode() + actualStack.getMetadata() * 1232323;
 		}
 	}
 	
 	private static final int LINES_PER_FILE = 150;
 	
-	public static void splitAndWriteZenScript(String header, List<String> lines, File scriptsFolder) throws Heckception {
+	public static void splitAndWriteZenScript(StringBuilder header, List<String> lines, File scriptsFolder) throws Heckception {
 		int fileCount = MathHelper.ceil(lines.size() / (float) LINES_PER_FILE);
 		
 		for(int i = 0; i < fileCount; i++) {
 			StringBuffer b = new StringBuffer();
-			b.append("#priority ");
-			b.append(fileCount + 5 - i);
-			b.append('\n');
-			b.append(header);
-			
+			b.append("#priority ")
+			 .append(fileCount + 5 - i)
+			 .append('\n')
+		  	 .append(header.toString())
+			 .append('\n');
+
+			System.out.println(b);
+			System.out.println(header);
+
 			int from = Math.min(i * LINES_PER_FILE, lines.size());
 			int to = Math.min((i + 1) * LINES_PER_FILE, lines.size());
 			lines.subList(from, to).forEach(s -> {
@@ -189,7 +195,7 @@ public class Heck {
 			});
 			
 			try {
-				File outputFile = new File(scriptsFolder.getAbsolutePath() + File.separator + "youre_an_expert_harry_" + i + ".zs");
+				File outputFile = new File(scriptsFolder.getAbsolutePath() + File.separator + "youre_an_expert_gary_" + i + ".zs");
 				if(outputFile.exists()) {
 					try {
 						YoureAnExpertHarry.LOGGER.info("Deleting " + outputFile.getAbsolutePath());
