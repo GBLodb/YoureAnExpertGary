@@ -1,13 +1,13 @@
 [
 {
-  "modid": "youre_an_expert_harry",
-  "name": "You're an expert, Harry!",
+  "modid": "youre_an_expert_gary",
+  "name": "You're an expert, Gary!",
   "description": "The new age of modpacks is here!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["quaternary"],
+  "authorList": ["quaternary", "Gary Bryson Luis Jr."],
   "credits": "ftb odyssey is a good pack",
   "logoFile": "",
   "screenshots": [],
