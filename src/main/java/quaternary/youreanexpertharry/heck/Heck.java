@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Heck {
-	public static final Random random = new Random();
+	public static Random random = new Random();
 	static List<Item> allItems;
 	public static YAEHSettings settings;
 	
@@ -48,7 +48,9 @@ public class Heck {
 					.forEach(p -> allHeck.tasks.add(new RecipeTask(allHeck, settings, allHeck.currentLevel, p)));
 			allHeck.nextTasks.clear();
 		}
-		
+
+		System.out.println(allHeck.usedMethods);
+
 		StringBuilder header = new StringBuilder();
 		allHeck.usedMethods.forEach(a -> a.getRequiredImports().ifPresent(i -> {
 			header.append(i).append("\n");
@@ -155,7 +157,7 @@ public class Heck {
 		}
 		public GoodItemStack(HeckTier.TierItemStack actualStack) {this.actualStack = actualStack.stack;}
 		
-		public final ItemStack actualStack;
+		public ItemStack actualStack;
 		
 		@Override
 		public boolean equals(Object obj) {
@@ -171,7 +173,7 @@ public class Heck {
 		}
 	}
 	
-	private static final int LINES_PER_FILE = 150;
+	private static int LINES_PER_FILE = 150;
 	
 	public static void splitAndWriteZenScript(StringBuilder header, List<String> lines, File scriptsFolder) throws Heckception {
 		int fileCount = MathHelper.ceil(lines.size() / (float) LINES_PER_FILE);

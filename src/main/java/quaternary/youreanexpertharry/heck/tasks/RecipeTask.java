@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeTask implements IHeckTask {
-    public final Heck.GoodItemStack outputGood;
+    public Heck.GoodItemStack outputGood;
     AbstractHeckMethod method;
-    final int tier;
-    final HeckData allHeck;
-    final YAEHSettings settings;
+    int tier;
+    HeckData allHeck;
+    YAEHSettings settings;
 
     public RecipeTask(HeckData allHeck, YAEHSettings settings, int tier, Heck.GoodItemStack outputGood) {
         this.allHeck = allHeck;
@@ -45,6 +45,8 @@ public class RecipeTask implements IHeckTask {
         if (recipeStacks.size() == 0) throw new Heckception("ran out of possible recipes, somehow!");
 
         allHeck.usedMethods.add(method);
+
+        System.out.println(method);
 
         String b = "//Recipe " +
                 allHeck.recipeCount +

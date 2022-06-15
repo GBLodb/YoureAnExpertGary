@@ -8,18 +8,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class HeckTier {
-    public final int id;
-    public final Set<Heck.GoodItemStack> bannedItems = new HashSet<>();
-    public final Set<Heck.GoodItemStack> goalItems = new HashSet<>();
-    public final Set<Heck.GoodItemStack> baseItems = new HashSet<>();
+    public int id;
+    public Set<Heck.GoodItemStack> bannedItems = new HashSet<>();
+    public Set<Heck.GoodItemStack> goalItems = new HashSet<>();
+    public Set<Heck.GoodItemStack> baseItems = new HashSet<>();
 
     public HeckTier(int id) {
         this.id = id;
     }
 
     public static class TierItemStack {
-        public final ItemStack stack;
-        public final int tier;
+        public ItemStack stack;
+        public int tier;
         public TierItemStack(ItemStack stack, int tier) {
             this.stack = stack;
             this.tier = tier;

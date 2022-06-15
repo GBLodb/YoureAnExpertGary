@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class ShapelessStack {
 
-    public final Heck.GoodItemStack actualStack;
+    public Heck.GoodItemStack actualStack;
     public int count;
     public ShapelessStack(Heck.GoodItemStack gis, int count) {
         this.actualStack = gis;

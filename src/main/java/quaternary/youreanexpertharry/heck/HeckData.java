@@ -13,14 +13,14 @@ public class HeckData {
 
     public Set<Heck.GoodItemStack> toAddRecipesFor = new HashSet<>();
     public Set<Heck.GoodItemStack> toAddRecipesForNext = new HashSet<>();
-    public final Set<Heck.GoodItemStack> bannedItems = new HashSet<>();
-    public final Set<Heck.GoodItemStack> allGoalItems = new HashSet<>();
-    public final Set<Heck.GoodItemStack> allBaseItems = new HashSet<>();
-    public final Set<AbstractHeckMethod> usedMethods = new HashSet<>();
-    public final Set<IHeckTask> tasks = new HashSet<>();
-    public final Set<IHeckTask> nextTasks = new HashSet<>();
+    public Set<Heck.GoodItemStack> bannedItems = new HashSet<>();
+    public Set<Heck.GoodItemStack> allGoalItems = new HashSet<>();
+    public Set<Heck.GoodItemStack> allBaseItems = new HashSet<>();
+    public Set<AbstractHeckMethod> usedMethods = new HashSet<>();
+    public Set<IHeckTask> tasks = new HashSet<>();
+    public Set<IHeckTask> nextTasks = new HashSet<>();
 
-    public final List<HeckTier> tiers = new ArrayList<>();
+    public List<HeckTier> tiers = new ArrayList<>();
     public int currentLevel;
     public int recipeCount;
 

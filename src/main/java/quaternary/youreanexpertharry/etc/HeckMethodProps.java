@@ -13,7 +13,7 @@ public class HeckMethodProps {
 		this(method, 0, Integer.MAX_VALUE);
 	}
 	
-	public final AbstractHeckMethod method;
-	public final int minLevel;
-	public final int maxLevel;
+	public AbstractHeckMethod method;
+	public int minLevel;
+	public int maxLevel;
 }
