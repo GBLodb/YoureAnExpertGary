@@ -34,6 +34,10 @@ repositories {
         name = 'cursemaven'
         url = 'https://cfa2.cursemaven.com/'
     }
+    maven {
+        name = 'ellpeck'
+        url = 'https://maven.ellpeck.de'
+    }
 }
 
 version = '1.1.2'
@@ -51,11 +55,14 @@ minecraft {
 }
 
 dependencies {
-    runtime 'com.blamejared:MTLib:3.0.5.15'
-    runtime 'CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.674'
     deobfCompile 'vazkii.botania:Botania:r1.10-363.148'
+    deobfCompile 'de.ellpeck.actuallyadditions:ActuallyAdditions:1.12.2-r152.16'
+    // I'm gonna leave this here just in case someone would write the fluids compat for me.
+    // deobfCompile 'curse.maven:gregtech-ce-unofficial-557242:3808907'
 
+    runtime 'com.blamejared:MTLib:3.0.5.15'
     runtime 'mezz.jei:jei_1.12.2:4.16.1.302'
+    runtime 'CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.674'
 }
 
 processResources {
