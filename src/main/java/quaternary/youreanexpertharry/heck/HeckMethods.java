@@ -42,11 +42,11 @@ public class HeckMethods {
 	}
 	
 	public static void init() {
-		SHAPELESS_TWO_BY_TWO = registerMethod("shapeless_2x2", new ShapelessTwoByTwoMethod());
-		SHAPED_THREE_BY_THREE = registerMethod("random_shaped_3x3", new ShapedThreeByThreeMethod());
-		SYMMETRICAL_SHAPED_THREE_BY_THREE = registerMethod("butterfly_shaped_3x3", new SymmetricalShapedThreeByThreeMethod());
-		FOUR_WAY_SYMMETRICAL_THREE_BY_THREE = registerMethod("square_shaped_3x3", new FourWaySymmetricalShapedThreeByThreeMethod());
-		SMELTING = registerMethod("furnace", new SmeltingMethod());
+		SHAPELESS_TWO_BY_TWO = registerMethod("youre_an_expert_gary_shapeless_2x2", new ShapelessTwoByTwoMethod());
+		SHAPED_THREE_BY_THREE = registerMethod("youre_an_expert_gary_random_shaped_3x3", new ShapedThreeByThreeMethod());
+		SYMMETRICAL_SHAPED_THREE_BY_THREE = registerMethod("youre_an_expert_gary_butterfly_shaped_3x3", new SymmetricalShapedThreeByThreeMethod());
+		FOUR_WAY_SYMMETRICAL_THREE_BY_THREE = registerMethod("youre_an_expert_gary_square_shaped_3x3", new FourWaySymmetricalShapedThreeByThreeMethod());
+		SMELTING = registerMethod("youre_an_expert_gary_furnace", new SmeltingMethod());
 
 		for (AbstractModule mod : YoureAnExpertHarry.modules) {
 			mod.init(methods);

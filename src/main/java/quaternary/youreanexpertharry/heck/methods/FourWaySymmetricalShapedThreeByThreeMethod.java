@@ -53,7 +53,7 @@ public class FourWaySymmetricalShapedThreeByThreeMethod extends AbstractCrafting
 		}
 		sanitySet.add(sanityList);
 		if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
-		String b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
+		String b = writeZenscript("youre_an_expert_gary_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
 
 		return new MutablePair<>(new MutablePair<>(recipeStacks, b), Boolean.TRUE);
 

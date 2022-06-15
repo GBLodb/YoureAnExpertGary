@@ -49,7 +49,7 @@ public class SmeltingMethod extends AbstractHeckMethod {
 		if (success) {
 			sanitySet.add(sanityItem);
 			if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
-			b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
+			b = writeZenscript("youre_an_expert_gary_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
 		}
 
 		return new MutablePair<>(new MutablePair<>(recipeStacks, b), success);
